@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="StudySync helps engineering students organize subjects, plan study sessions, track assignments, and prepare for exams.">
+
+    <title>StudySync | Smart Study Planner</title>
+
+    <link rel="stylesheet" href="style.css">
+   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+<script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="header">
+        <button id="theme-toggle" type="button">🌙 Dark Mode</button>
+<button id="clear-tasks" type="button">🗑️ Clear All Tasks</button>
+        <nav class="navbar" aria-label="Main navigation">
+            <a href="#" class="logo">Study<span>Sync</span></a>
+
+            <ul class="nav-links">
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#subjects">My Subjects</a></li>
+                <li><a href="#tasks">My Tasks</a></li>
+                <li><a href="#focus">Focus Timer</a></li>
+            </ul>
+
+            <a href="#tasks" class="nav-button">Start Studying</a>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <main class="container" id="dashboard">
+
+        <!-- Welcome section -->
+        <section class="welcome">
+            <div>
+                <p class="eyebrow">YOUR PERSONAL STUDY SPACE</p>
+                <h1>Study smarter, not harder. ✨</h1>
+                <p class="welcome-text">
+                    Organize your subjects, complete your tasks,
+                    and make every study session count.
+                </p>
+            </div>
+
+            <div class="welcome-icon" aria-hidden="true">📚</div>
+        </section>
+
+        <!-- Summary cards -->
+        <section class="stats" aria-label="Study summary">
+
+            <article class="stat-card">
+                <span class="stat-icon">📖</span>
+                <p>My Subjects</p>
+                <h2 id="subject-count">0</h2>
+                <span>Subjects to learn</span>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">📝</span>
+                <p>Pending Tasks</p>
+                <h2 id="pending-count">0</h2>
+                <span>Tasks to complete</span>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">✅</span>
+                <p>Completed Tasks</p>
+                <h2 id="completed-count">0</h2>
+                <span>Tasks finished</span>
+            </article>
+
+            <article class="stat-card">
+                <span class="stat-icon">🎯</span>
+                <p>Study Progress</p>
+                <h2 id="progress-percent">0%</h2>
+                <span>Keep moving forward!</span>
+            </article>
+
+        </section>
+
+        <!-- Subjects -->
+         <!-- Study Analytics -->
+<section class="section" id="analytics">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">YOUR ACHIEVEMENTS</p>
+            <h2>Study Analytics 📊</h2>
+        </div>
+    </div>
+
+    <div class="analytics-grid">
+        <article class="analytics-card">
+            <h3>Task Completion</h3>
+            <p class="analytics-description">
+                Track your study progress.
+            </p>
+
+            <div class="chart-container">
+                <canvas id="progress-chart"
+                    role="img"
+                    aria-label="Chart showing completed and pending tasks">
+                    Study progress chart
+                </canvas>
+            </div>
+        </article>
+
+        <article class="analytics-card">
+            <h3>Study Summary</h3>
+            <p class="analytics-description">
+                Your current performance.
+            </p>
+
+            <div class="summary-row">
+                <span>Total Tasks</span>
+                <strong id="total-tasks">0</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Completed</span>
+                <strong id="analytics-completed">0</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Pending</span>
+                <strong id="analytics-pending">0</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Overdue</span>
+                <strong id="overdue-count">0</strong>
+            </div>
+        </article>
+    </div>
+</section>
+
+<!-- Revision Planner -->
+<section class="section" id="revision">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">REMEMBER WHAT YOU LEARN</p>
+            <h2>Revision Planner 🧠</h2>
+        </div>
+    </div>
+
+    <form id="revision-form" class="task-form revision-form">
+        <div class="form-group">
+            <label for="revision-topic">Topic to revise</label>
+            <input id="revision-topic" type="text"
+                placeholder="e.g. Recursion in Java" required>
+        </div>
+
+        <div class="form-group">
+            <label for="revision-subject">Subject</label>
+            <input id="revision-subject" type="text"
+                placeholder="e.g. Java" required>
+        </div>
+
+        <div class="form-group">
+            <label for="revision-date">Revision date</label>
+            <input id="revision-date" type="date" required>
+        </div>
+
+        <button type="submit" class="primary-button">
+            + Schedule Revision
+        </button>
+    </form>
+
+    <div class="task-list" id="revision-list">
+        <p class="empty-message">
+            Your scheduled revision topics will appear here.
+        </p>
+    </div>
+</section>
+        <section class="section" id="subjects">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">YOUR LEARNING JOURNEY</p>
+                    <h2>My Subjects 📚</h2>
+                </div>
+
+                <button type="button" class="secondary-button"
+                    id="add-subject-button">
+                    + Add Subject
+                </button>
+            </div>
+
+            <div class="subject-grid" id="subject-list">
+                <article class="subject-card">
+                    <span class="subject-icon">💻</span>
+                    <h3>Java Programming</h3>
+                    <p>Learn programming concepts</p>
+                </article>
+
+                <article class="subject-card">
+                    <span class="subject-icon">🗄️</span>
+                    <h3>Database Management</h3>
+                    <p>Practice SQL and DBMS</p>
+                </article>
+
+                <article class="subject-card">
+                    <span class="subject-icon">🧠</span>
+                    <h3>Data Structures</h3>
+                    <p>Understand algorithms</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Tasks -->
+        <section class="section" id="tasks">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">PLAN YOUR DAY</p>
+                    <h2>My Study Tasks ✍️</h2>
+                </div>
+            </div>
+
+            <form id="task-form" class="task-form">
+                <div class="form-group">
+                    <label for="task-title">Task name</label>
+                    <input type="text" id="task-title"
+                        placeholder="e.g. Complete Java notes" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="task-subject">Subject</label>
+                    <input type="text" id="task-subject"
+                        placeholder="e.g. Java" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="task-date">Due date</label>
+                    <input type="date" id="task-date" required>
+                </div>
+
+                <button type="submit" class="primary-button">
+                    + Add Task
+                </button>
+            </form>
+
+            <div class="task-list" id="task-list">
+                <p class="empty-message">
+                    Your study tasks will appear here. Add your first task!
+                </p>
+            </div>
+        </section>
+
+        <!-- Focus timer -->
+        <section class="section focus-section" id="focus">
+            <p class="eyebrow">TIME TO CONCENTRATE</p>
+            <h2>Focus Timer ⏱️</h2>
+            <p>Work for 25 minutes, then take a short break.</p>
+
+            <div class="timer" id="timer-display"
+                role="timer" aria-label="Study timer">
+                25:00
+            </div>
+
+            <div class="timer-buttons">
+                <button type="button" class="primary-button"
+                    id="start-timer">Start</button>
+                <button type="button" class="secondary-button"
+                    id="pause-timer">Pause</button>
+                <button type="button" class="secondary-button"
+                    id="reset-timer">Reset</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Made with 💜 for students who dream big.</p>
+        <p>StudySync &copy; 2026</p>
+    </footer>
+
+</body>
+</html>
